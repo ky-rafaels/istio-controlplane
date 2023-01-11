@@ -1,0 +1,71 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-ingress
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  destination:
+    namespace: istio-ingress
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://istio-release.storage.googleapis.com/charts
+    targetRevision: 1.16.1
+    helm:
+      values: |
+        name: ""
+        revision: 1-16
+        service:
+          type: None
+        labels:
+          istio: ingressgateway
+          istio.io/rev: 1-16
+        annotations:
+          proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+    chart: gateway
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    istio: ingressgateway
+    revision: 1-16
+  name: istio-ingressgateway
+  namespace: istio-ingress
+spec:
+  ports:
+  - name: http2
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 8443
+  # loadBalancerSourceRanges:
+  # - 52.5.112.38/32
+  # - 52.3.84.75/32
+  # - 52.3.133.42/32
+  # - 52.32.179.208/32
+  # - 52.32.179.120/32
+  # - 52.32.97.144/32
+  # - 52.32.179.149/32
+  # - 52.32.176.206/32
+  # - 52.32.179.255/32
+  # - 52.32.179.122/32
+  # - 52.32.179.124/32
+  # - 52.32.179.141/32
+  selector:
+    istio: ingressgateway
+    istio.io/rev: 1-16
+  type: LoadBalancer
