@@ -25,13 +25,13 @@ patchesStrategicMerge:
       source:
         helm:
           values: |
-            name: istio-ingressgateway-1-16
-            revision: 1-16
+            name: istio-ingressgateway-staging
+            revision: staging
             service:
               type: None
             labels:
               istio: ingressgateway
-              istio.io/rev: 1-16
+              istio.io/rev: staging
             annotations:
               proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
 - |
@@ -44,7 +44,7 @@ patchesStrategicMerge:
       source:
         helm:
           values: |
-            revision: 1-16
+            revision: staging
             global:
               meshID: mesh1
               multiCluster:
@@ -73,12 +73,12 @@ patchesStrategicMerge:
     metadata:
       labels:
         istio: ingressgateway
-        revision: 1-16
+        revision: staging
       name: istio-ingressgateway
       namespace: istio-ingress
     spec:
       selector:
         istio: ingressgateway
-        istio.io/rev: 1-16
+        istio.io/rev: staging
 
-nameSuffix: "-1-16-1"
+nameSuffix: "-staging"
