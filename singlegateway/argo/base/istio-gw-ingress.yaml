@@ -35,6 +35,11 @@ spec:
       - CreateNamespace=true
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+  name: istio-ingress
+---
+apiVersion: v1
 kind: Service
 metadata:
   labels:

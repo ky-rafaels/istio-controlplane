@@ -1,0 +1,130 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-ingress-private
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  destination:
+    namespace: istio-ingress-private
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://istio-release.storage.googleapis.com/charts
+    targetRevision: 1.16.1
+    helm:
+      values: |
+        name: istio-ingress-private
+        revision: 1-16
+        service:
+          type: LoadBalancer
+        labels:
+          istio: ingressgateway
+          gateway-type: private
+          istio.io/rev: 1-16
+        annotations:
+          proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+    chart: gateway
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-ingress-public
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  destination:
+    namespace: istio-ingress-public
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://istio-release.storage.googleapis.com/charts
+    targetRevision: 1.16.1
+    helm:
+      values: |
+        name: istio-ingress-public
+        revision: 1-16
+        service:
+          type: LoadBalancer
+        labels:
+          istio: ingressgateway
+          gateway-type: public
+          istio.io/rev: 1-16
+        annotations:
+          proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+    chart: gateway
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
+# ---
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: istio-ingress-private
+# ---
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: istio-ingress-public
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   labels:
+#     istio: ingressgateway
+#     gateway-type: private
+#     revision: 1-16
+#   name: istio-ingressgateway-private
+#   namespace: istio-ingress-private
+# spec:
+#   ports:
+#   - name: http2
+#     port: 80
+#     protocol: TCP
+#     targetPort: 8080
+#   - name: https
+#     port: 443
+#     protocol: TCP
+#     targetPort: 8443
+#   selector:
+#     istio: ingressgateway
+#     app: istio-ingress-private
+#   type: LoadBalancer
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   labels:
+#     istio: ingressgateway
+#     gateway-type: public
+#     revision: 1-16
+#   name: istio-ingressgateway-public
+#   namespace: istio-ingress-public
+# spec:
+#   ports:
+#   - name: http2
+#     port: 80
+#     protocol: TCP
+#     targetPort: 8080
+#   - name: https
+#     port: 443
+#     protocol: TCP
+#     targetPort: 8443
+#   selector:
+#     istio: ingressgateway
+#     app: istio-ingress-private
+#   type: LoadBalancer

@@ -1,0 +1,1 @@
+kubectl apply -f https://raw.githubusercontent.com/cilium/cilium/1.12.5/examples/kubernetes/addons/prometheus/monitoring-example.yaml

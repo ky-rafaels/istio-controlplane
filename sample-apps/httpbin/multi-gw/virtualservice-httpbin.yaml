@@ -1,0 +1,42 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: httpbin-private-route
+  namespace: istio-ingress-private
+spec:
+  gateways:
+  - istio-ingress-private/private-gateway
+  hosts:
+  - httpbin-private.kyle.consultsolo.net
+  http:
+  - match:
+    - uri:
+        prefix: /
+    name: httpbin-private-route
+    route:
+    - destination:
+        host: httpbin.httpbin-private.svc.cluster.local
+        port:
+          number: 8000
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: httpbin-public-route
+  namespace: istio-ingress-public
+spec:
+  gateways:
+  - istio-ingress-public/public-gateway
+  hosts:
+  - httpbin-public.kyle.consultsolo.net
+  http:
+  - match:
+    - uri:
+        prefix: /
+    name: httpbin-public-route
+    route:
+    - destination:
+        host: httpbin.httpbin-public.svc.cluster.local
+        port:
+          number: 8000

@@ -1,0 +1,20 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: productpage-v1 
+  namespace: istio-ingress
+spec:
+  gateways:
+  - istio-ingress/primary-gateway
+  hosts:
+  - productpage.kyle.consultsolo.net
+  http:
+  - match:
+    - uri:
+        prefix: /
+    name: productpage-v1 
+    route:
+    - destination:
+        host: productpage.bookinfo.svc.cluster.local
+        port:
+          number: 9080

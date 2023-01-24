@@ -31,7 +31,7 @@ patchesStrategicMerge:
               type: None
             labels:
               istio: ingressgateway
-              istio.io/rev: prod
+              istio.io/rev: 1-15
             annotations:
               proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
 - |
@@ -79,6 +79,6 @@ patchesStrategicMerge:
     spec:
       selector:
         istio: ingressgateway
-        istio.io/rev: prod
+        istio.io/rev: 1-15
 
 nameSuffix: "-prod"
