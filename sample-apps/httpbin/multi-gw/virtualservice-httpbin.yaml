@@ -3,10 +3,10 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: httpbin-private-route
-  namespace: istio-ingress-private
+  namespace: httpbin-private
 spec:
   gateways:
-  - istio-ingress-private/private-gateway
+  - private-gateway
   hosts:
   - httpbin-private.kyle.consultsolo.net
   http:
@@ -24,10 +24,10 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: httpbin-public-route
-  namespace: istio-ingress-public
+  namespace: httpbin-public
 spec:
   gateways:
-  - istio-ingress-public/public-gateway
+  - public-gateway
   hosts:
   - httpbin-public.kyle.consultsolo.net
   http:
