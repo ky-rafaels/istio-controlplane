@@ -57,19 +57,10 @@ spec:
     port: 443
     protocol: TCP
     targetPort: 8443
-  # loadBalancerSourceRanges:
-  # - 52.5.112.38/32
-  # - 52.3.84.75/32
-  # - 52.3.133.42/32
-  # - 52.32.179.208/32
-  # - 52.32.179.120/32
-  # - 52.32.97.144/32
-  # - 52.32.179.149/32
-  # - 52.32.176.206/32
-  # - 52.32.179.255/32
-  # - 52.32.179.122/32
-  # - 52.32.179.124/32
-  # - 52.32.179.141/32
+  - name: tls-passthrough
+    port: 10443
+    targetPort: 8443
+    protocol: TCP
   selector:
     istio: ingressgateway
     istio.io/rev: 1-16

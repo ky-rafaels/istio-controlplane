@@ -26,7 +26,7 @@ patchesStrategicMerge:
         helm:
           values: |
             name: istio-ingressgateway-prod
-            revision: prod
+            revision: 1-15
             service:
               type: None
             labels:
@@ -44,7 +44,7 @@ patchesStrategicMerge:
       source:
         helm:
           values: |
-            revision: prod
+            revision: 1-15
             global:
               meshID: mesh1
               multiCluster:
@@ -73,7 +73,7 @@ patchesStrategicMerge:
     metadata:
       labels:
         istio: ingressgateway
-        revision: prod
+        revision: 1-15
       name: istio-ingressgateway
       namespace: istio-ingress
     spec:
