@@ -13,13 +13,16 @@ spec:
     namespace: istio-ingress-private
     server: https://kubernetes.default.svc
   project: default
-  source:
-    repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.17.2
-    helm:
-      valueFiles:
-      - values/istio-ingress-private.yaml
-    chart: gateway
+  sources:
+    - repoURL: https://istio-release.storage.googleapis.com/charts
+      targetRevision: 1.17.2
+      helm:
+        valueFiles:
+        - $values/1.17.2/values/istio-ingress-private.yaml
+      chart: gateway
+    - repoURL: https://github.com/ky-rafaels/istio-controlplane.git
+      targetRevision: main
+      ref: values
   syncPolicy:
     automated:
       prune: true
@@ -40,13 +43,16 @@ spec:
     namespace: istio-ingress-public
     server: https://kubernetes.default.svc
   project: default
-  source:
-    repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.17.2
-    helm:
-      valueFiles:
-      - values/istio-ingress-public.yaml
-    chart: gateway
+  sources:
+    - repoURL: https://istio-release.storage.googleapis.com/charts
+      targetRevision: 1.17.2
+      helm:
+        valueFiles:
+        - $values/1.17.2/values/istio-ingress-public.yaml
+      chart: gateway
+    - repoURL: https://github.com/ky-rafaels/istio-controlplane.git
+      targetRevision: main
+      ref: values
   syncPolicy:
     automated:
       prune: true
