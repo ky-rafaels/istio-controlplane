@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-ingress-private
+  name: istio-ingress-private-1-15
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -38,7 +38,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-ingress-public
+  name: istio-ingress-public-1-15
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -70,61 +70,3 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
-# ---
-# apiVersion: v1
-# kind: Namespace
-# metadata:
-#   name: istio-ingress-private
-# ---
-# apiVersion: v1
-# kind: Namespace
-# metadata:
-#   name: istio-ingress-public
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   labels:
-#     istio: ingressgateway
-#     gateway-type: private
-#     revision: 1-16
-#   name: istio-ingressgateway-private
-#   namespace: istio-ingress-private
-# spec:
-#   ports:
-#   - name: http2
-#     port: 80
-#     protocol: TCP
-#     targetPort: 8080
-#   - name: https
-#     port: 443
-#     protocol: TCP
-#     targetPort: 8443
-#   selector:
-#     istio: ingressgateway
-#     app: istio-ingress-private
-#   type: LoadBalancer
-# ---
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   labels:
-#     istio: ingressgateway
-#     gateway-type: public
-#     revision: 1-16
-#   name: istio-ingressgateway-public
-#   namespace: istio-ingress-public
-# spec:
-#   ports:
-#   - name: http2
-#     port: 80
-#     protocol: TCP
-#     targetPort: 8080
-#   - name: https
-#     port: 443
-#     protocol: TCP
-#     targetPort: 8443
-#   selector:
-#     istio: ingressgateway
-#     app: istio-ingress-private
-#   type: LoadBalancer

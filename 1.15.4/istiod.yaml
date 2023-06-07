@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istiod
+  name: istiod-1-15
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -47,16 +47,3 @@ spec:
       prune: true
     syncOptions:
       - CreateNamespace=true
-
-        # sidecarInjectorWebhook:
-        #   templates:
-        #     custom: |
-        #       spec:
-        #         containers:
-        #           - name: istio-proxy
-        #             env:
-        #               - name: POD_UID
-        #                 valueFrom:
-        #                   fieldRef:
-        #                     apiVersion: v1
-        #                     fieldPath: metadata.u

@@ -1,0 +1,56 @@
+revision: 1-17
+global:
+  meshID: mesh1
+  multiCluster:
+    clusterName: cluster1
+  network: network1
+  hub: us-docker.pkg.dev/gloo-mesh/istio-a7d0a87b8a81 # CHANGE THIS
+  tag: 1.17.2-solo
+  logAsJson: false
+  logging:
+    level: "default:info"
+  proxy:
+    logLevel: warning
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 2000m
+        memory: 1024Mi
+    holdApplicationUntilProxyStarts: false
+meshConfig:
+  rootNamespace: istio-config
+  trustDomain: cluster1
+  accessLogEncoding: JSON
+  enablePrometheusMerge: true
+  defaultConfig:
+    holdApplicationUntilProxyStarts: true
+    envoyMetricsService:
+      address: gloo-mesh-agent.gloo-mesh:9977
+    envoyAccessLogService:
+      address: gloo-mesh-agent.gloo-mesh:9977
+    terminationDrainDuration: 10s
+    proxyMetadata:
+      ISTIO_META_DNS_CAPTURE: "true"
+      ISTIO_META_DNS_AUTO_ALLOCATE: "true"
+      GLOO_MESH_CLUSTER_NAME: cluster1
+pilot:
+  autoscaleEnabled: true
+  autoscaleMin: 1
+  autoscaleMax: 5
+  replicaCount: 1
+  rollingMaxSurge: 100%
+  rollingMaxUnavailable: 25%
+  env:
+    PILOT_ENABLE_K8S_SELECT_WORKLOAD_ENTRIES: "false"
+    PILOT_SKIP_VALIDATE_TRUST_DOMAIN: "true"
+    AUTO_RELOAD_PLUGIN_CERTS: "true"
+    PILOT_DEBOUNCE_AFTER: 300ms
+    PILOT_DEBOUNCE_MAX: 10s
+    PILOT_PUSH_THROTTLE: "1000"
+    PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "true"
+  resources:
+    requests:
+      cpu: 500m
+      memory: 2048Mi
