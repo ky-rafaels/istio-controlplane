@@ -13,35 +13,16 @@ spec:
     namespace: istio-system
     server: https://kubernetes.default.svc
   project: default
-  source:
-    repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.15.4
-    helm:
-      values: |
-        revision: 1-15
-        global:
-          meshID: mesh1
-          multiCluster:
-            clusterName: cluster1
-          network: network1
-          hub: us-docker.pkg.dev/gloo-mesh/istio-workshops
-          tag: 1.15.4-solo
-        meshConfig:
-          accessLogFile: /dev/stdout
-          accessLogEncoding: JSON
-          protocolDetectionTimeout: 5s
-          defaultConfig:
-            holdApplicationUntilProxyStarts: true
-            proxyMetadata:
-              ISTIO_METADATA_DNS_CAPTURE: "true"
-            gatewayTopology:
-              forwardClientCertDetails: FORWARD_ONLY
-          outboundTrafficPolicy:
-            mode: ALLOW_ANY
-        env:
-          PILOT_ENABLE_K8S_SELECT_WORKLOAD_ENTRIES: "false"
-          PILOT_SKIP_VALIDATE_TRUST_DOMAIN: "true"
-    chart: istiod
+  sources:
+    - repoURL: https://istio-release.storage.googleapis.com/charts
+      targetRevision: 1.15.4
+      helm:
+        valueFiles:
+        - $values/helm/1.15.4/values/istiod.yaml
+      chart: istiod
+    - repoURL: https://github.com/ky-rafaels/istio-controlplane.git
+      targetRevision: main
+      ref: values
   syncPolicy:
     automated:
       prune: true

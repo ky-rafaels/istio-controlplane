@@ -1,0 +1,11 @@
+name: istio-ingress-public
+revision: 1-15
+service:
+  type: LoadBalancer
+  # type: NodePort
+labels:
+  istio: ingressgateway
+  gateway-type: public
+  istio.io/rev: 1-15
+annotations:
+  proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'

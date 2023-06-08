@@ -13,22 +13,16 @@ spec:
     namespace: istio-ingress-private
     server: https://kubernetes.default.svc
   project: default
-  source:
-    repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.15.4
-    helm:
-      values: |
-        name: istio-ingress-private
-        revision: 1-15
-        service:
-          type: LoadBalancer
-        labels:
-          istio: ingressgateway
-          gateway-type: private
-          istio.io/rev: 1-15
-        annotations:
-          proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
-    chart: gateway
+  sources:
+    - repoURL: https://istio-release.storage.googleapis.com/charts
+      targetRevision: 1.15.4
+      helm:
+        valueFiles:
+        - $values/helm/1.15.4/values/istio-ingress-private.yaml
+      chart: gateway
+    - repoURL: https://github.com/ky-rafaels/istio-controlplane.git
+      targetRevision: main
+      ref: values
   syncPolicy:
     automated:
       prune: true
@@ -49,22 +43,16 @@ spec:
     namespace: istio-ingress-public
     server: https://kubernetes.default.svc
   project: default
-  source:
-    repoURL: https://istio-release.storage.googleapis.com/charts
-    targetRevision: 1.15.4
-    helm:
-      values: |
-        name: istio-ingress-public
-        revision: 1-15
-        service:
-          type: LoadBalancer
-        labels:
-          istio: ingressgateway
-          gateway-type: public
-          istio.io/rev: 1-15
-        annotations:
-          proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
-    chart: gateway
+  sources:
+    - repoURL: https://istio-release.storage.googleapis.com/charts
+      targetRevision: 1.15.4
+      helm:
+        valueFiles:
+        - $values/helm/1.15.4/values/istio-ingress-public.yaml
+      chart: gateway
+    - repoURL: https://github.com/ky-rafaels/istio-controlplane.git
+      targetRevision: main
+      ref: values
   syncPolicy:
     automated:
       prune: true
