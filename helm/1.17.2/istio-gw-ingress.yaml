@@ -18,7 +18,7 @@ spec:
       targetRevision: 1.17.2
       helm:
         valueFiles:
-        - $values/1.17.2/values/istio-ingress-private.yaml
+        - $values/helm/1.17.2/values/istio-ingress-private.yaml
       chart: gateway
     - repoURL: https://github.com/ky-rafaels/istio-controlplane.git
       targetRevision: main
@@ -48,7 +48,7 @@ spec:
       targetRevision: 1.17.2
       helm:
         valueFiles:
-        - $values/1.17.2/values/istio-ingress-public.yaml
+        - $values/helm/1.17.2/values/istio-ingress-public.yaml
       chart: gateway
     - repoURL: https://github.com/ky-rafaels/istio-controlplane.git
       targetRevision: main

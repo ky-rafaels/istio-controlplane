@@ -2,6 +2,7 @@ name: istio-ingress-public
 revision: 1-17
 service:
   type: LoadBalancer
+  # type: NodePort
 labels:
   istio: ingressgateway
   gateway-type: public

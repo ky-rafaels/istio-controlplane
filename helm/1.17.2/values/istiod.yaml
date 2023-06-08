@@ -4,7 +4,7 @@ global:
   multiCluster:
     clusterName: cluster1
   network: network1
-  hub: us-docker.pkg.dev/gloo-mesh/istio-a7d0a87b8a81 # CHANGE THIS
+  hub: us-docker.pkg.dev/gloo-mesh/istio-workshops # change this
   tag: 1.17.2-solo
   logAsJson: false
   logging:
