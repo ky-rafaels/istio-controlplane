@@ -22,6 +22,7 @@ global:
 meshConfig:
   rootNamespace: istio-config
   trustDomain: cluster1
+  accessLogFile: /dev/stdout
   accessLogEncoding: JSON
   enablePrometheusMerge: true
   defaultConfig:
