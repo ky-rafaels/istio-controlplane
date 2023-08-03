@@ -25,7 +25,7 @@ meshConfig:
   accessLogFile: /dev/stdout
   accessLogEncoding: JSON
   accessLogFormat: |
-    {"x_subscription_tier": '%DYNAMIC_METADATA(io.solo.transformation:x_subscription_tier)%'}
+    {"x_subscription_tier": '%REQ(x-subscription-tier)%'}
   enablePrometheusMerge: true
   defaultConfig:
     holdApplicationUntilProxyStarts: true
