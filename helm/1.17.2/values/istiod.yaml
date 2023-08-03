@@ -24,8 +24,8 @@ meshConfig:
   trustDomain: cluster1
   accessLogFile: /dev/stdout
   accessLogEncoding: JSON
-  accessLogFormat:
-    x_subscription_tier: '%DYNAMIC_METADATA(io.solo.transformation:x_subscription_tier)%'
+  accessLogFormat: |
+    {"x_subscription_tier": '%DYNAMIC_METADATA(io.solo.transformation:x_subscription_tier)%'}
   enablePrometheusMerge: true
   defaultConfig:
     holdApplicationUntilProxyStarts: true
