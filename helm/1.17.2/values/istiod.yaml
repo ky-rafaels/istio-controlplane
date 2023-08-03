@@ -25,11 +25,7 @@ meshConfig:
   accessLogFile: /dev/stdout
   accessLogEncoding: JSON
   accessLogFormat: |
-    {
-      "accessLogFormat": "{
-                          \"x_subscription_tier\": \"%REQ(x-subscription-tier)%\"
-                          }"
-    }
+    {"accessLogFormat": {"x_subscription_tier": "%REQ(x-subscription-tier)%"}}
   enablePrometheusMerge: true
   defaultConfig:
     holdApplicationUntilProxyStarts: true
