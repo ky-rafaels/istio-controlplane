@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - "../base"
+
+patchesJson6902:
+- target:
+    version: v2
+    name: ".*installation"
+    kind: IstioLifecycleManager
+  patch: |-
+    - op: replace
+      path: /spec/installations/0/revision
+      value: 1.16.2
+    - op: replace
+      path: /spec/installations/0/istioOperatorSpec/hub
+      value: 'us-docker.pkg.dev/gloo-mesh/istio-workshops'
+    - op: replace
+      path: /spec/installations/0/istioOperatorSpec/tag
+      value: 1.16.2-solo
+- target:
+    version: v2
+    name: ".*eastwest"
+    kind: GatewayLifecycleManager
+  patch: |-
+    - op: replace
+      path: /spec/installations/0/revision
+      value: 1.16.2
+    - op: replace
+      path: /spec/installations/0/istioOperatorSpec/hub
+      value: 'us-docker.pkg.dev/gloo-mesh/istio-workshops'
+    - op: replace
+      path: /spec/installations/0/istioOperatorSpec/tag
+      value: 1.16.2-solo
