@@ -12,7 +12,7 @@ patchesJson6902:
   patch: |-
     - op: replace
       path: /spec/installations/0/revision
-      value: 1.16.2
+      value: 1-16
     - op: replace
       path: /spec/installations/0/istioOperatorSpec/hub
       value: 'us-docker.pkg.dev/gloo-mesh/istio-workshops'
