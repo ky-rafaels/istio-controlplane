@@ -12,7 +12,21 @@ patchesJson6902:
   patch: |-
     - op: replace
       path: /spec/installations/0/revision
-      value: 1.17.2
+      value: 1-17
+    - op: replace
+      path: /spec/installations/0/istioOperatorSpec/hub
+      value: 'us-docker.pkg.dev/gloo-mesh/istio-workshops'
+    - op: replace
+      path: /spec/installations/0/istioOperatorSpec/tag
+      value: 1.17.2-solo
+- target:
+    version: v2
+    name: ".*ingress"
+    kind: GatewayLifecycleManager
+  patch: |-
+    - op: replace
+      path: /spec/installations/0/gatewayRevision
+      value: 1-17
     - op: replace
       path: /spec/installations/0/istioOperatorSpec/hub
       value: 'us-docker.pkg.dev/gloo-mesh/istio-workshops'
@@ -25,8 +39,8 @@ patchesJson6902:
     kind: GatewayLifecycleManager
   patch: |-
     - op: replace
-      path: /spec/installations/0/revision
-      value: 1.17.2
+      path: /spec/installations/0/gatewayRevision
+      value: 1-17
     - op: replace
       path: /spec/installations/0/istioOperatorSpec/hub
       value: 'us-docker.pkg.dev/gloo-mesh/istio-workshops'

@@ -3,6 +3,6 @@ kind: Kustomization
 
 resources:
   - 01-ilm.yaml
-  # - 02-glm-ingress.yaml
+  - 02-glm-ingress.yaml
   - 03-glm-eastwest.yaml
 

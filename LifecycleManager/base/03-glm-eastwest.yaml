@@ -1,61 +1,61 @@
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: istio-ingressgateway
-    istio: eastwestgateway
-    topology.istio.io/network: cluster1
-  name: istio-eastwestgateway
-  namespace: istio-gateways
-spec:
-  ports:
-  - name: status-port
-    port: 15021
-    protocol: TCP
-    targetPort: 15021
-  - name: tls
-    port: 15443
-    protocol: TCP
-    targetPort: 15443
-  - name: https
-    port: 16443
-    protocol: TCP
-    targetPort: 16443
-  - name: tcp-istiod
-    port: 15012
-    protocol: TCP
-    targetPort: 15012
-  - name: tcp-webhook
-    port: 15017
-    protocol: TCP
-    targetPort: 15017
-  selector:
-    app: istio-ingressgateway
-    istio: eastwestgateway
-    revision: 1-17
-    topology.istio.io/network: cluster1
-  type: LoadBalancer
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   labels:
+#     app: istio-ingressgateway
+#     istio: eastwestgateway
+#     topology.istio.io/network: cluster1
+#   name: istio-eastwestgateway
+#   namespace: istio-gateways
+# spec:
+#   ports:
+#   - name: status-port
+#     port: 15021
+#     protocol: TCP
+#     targetPort: 15021
+#   - name: tls
+#     port: 15443
+#     protocol: TCP
+#     targetPort: 15443
+#   - name: https
+#     port: 16443
+#     protocol: TCP
+#     targetPort: 16443
+#   - name: tcp-istiod
+#     port: 15012
+#     protocol: TCP
+#     targetPort: 15012
+#   - name: tcp-webhook
+#     port: 15017
+#     protocol: TCP
+#     targetPort: 15017
+#   selector:
+#     app: istio-ingressgateway
+#     istio: eastwestgateway
+#     revision: 1-17
+#     topology.istio.io/network: cluster1
+#   type: LoadBalancer
 ---
 apiVersion: admin.gloo.solo.io/v2
 kind: GatewayLifecycleManager
 metadata:
-  name: cluster1-eastwest
+  name: cluster2-eastwest
   namespace: gloo-mesh
 spec:
   installations:
     - clusters:
-      - name: cluster1
+      - name: cluster2
         activeGateway: false
       gatewayRevision: 1-17
       istioOperatorSpec:
         profile: empty
         hub: us-docker.pkg.dev/gloo-mesh/istio-workshops
         tag: 1.17.2-solo
-        values:
-          gateways:
-            istio-ingressgateway:
-              customService: true
+        # values:
+        #   gateways:
+        #     istio-ingressgateway:
+        #       customService: true
         components:
           ingressGateways:
             - name: istio-eastwestgateway
@@ -63,10 +63,10 @@ spec:
               enabled: true
               label:
                 istio: eastwestgateway
-                topology.istio.io/network: cluster1
+                topology.istio.io/network: cluster2
               k8s:
                 env:
                   - name: ISTIO_META_ROUTER_MODE
                     value: "sni-dnat"
                   - name: ISTIO_META_REQUESTED_NETWORK_VIEW
-                    value: cluster1
+                    value: cluster2
