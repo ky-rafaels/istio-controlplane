@@ -24,8 +24,6 @@ meshConfig:
   trustDomain: cluster1
   accessLogFile: /dev/stdout
   accessLogEncoding: JSON
-  accessLogFormat: |
-    {"x_subscription_tier": "%REQ(x-subscription-tier)%"}
   enablePrometheusMerge: true
   defaultConfig:
     holdApplicationUntilProxyStarts: true
@@ -52,7 +50,7 @@ pilot:
     PILOT_DEBOUNCE_AFTER: 300ms
     PILOT_DEBOUNCE_MAX: 10s
     PILOT_PUSH_THROTTLE: "1000"
-    PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "true"
+    PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "false"
   resources:
     requests:
       cpu: 500m
