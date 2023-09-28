@@ -10,7 +10,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   destination:
-    namespace: istio-ingress
+    namespace: istio-ingress-private
     server: https://kubernetes.default.svc
   project: default
   sources:
@@ -18,7 +18,7 @@ spec:
       targetRevision: 1.18.3
       helm:
         valueFiles:
-        - $values/helm/1.18.3/values/istio-ingress-private.yaml
+        - $values/helm/1.18.3/values/istio-ingress.yaml
       chart: gateway
     - repoURL: https://github.com/ky-rafaels/istio-controlplane.git
       targetRevision: main
