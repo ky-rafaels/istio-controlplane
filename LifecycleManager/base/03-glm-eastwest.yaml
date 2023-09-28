@@ -3,9 +3,9 @@
 # kind: Service
 # metadata:
 #   labels:
-#     app: istio-ingressgateway
-#     istio: eastwestgateway
-#     topology.istio.io/network: cluster1
+#     app: eastwestgateway 
+#     istio: ingressgateway
+#     topology.istio.io/network: ""
 #   name: istio-eastwestgateway
 #   namespace: istio-gateways
 # spec:
@@ -31,10 +31,9 @@
 #     protocol: TCP
 #     targetPort: 15017
 #   selector:
-#     app: istio-ingressgateway
-#     istio: eastwestgateway
+#     istio: ingressgateway
+#     app: eastwestgateway
 #     revision: 1-17
-#     topology.istio.io/network: cluster1
 #   type: LoadBalancer
 ---
 apiVersion: admin.gloo.solo.io/v2
@@ -46,27 +45,55 @@ spec:
   installations:
     - clusters:
       - name: cluster2
-        activeGateway: false
+        activeGateway: true
       gatewayRevision: 1-17
       istioOperatorSpec:
         profile: empty
         hub: us-docker.pkg.dev/gloo-mesh/istio-workshops
         tag: 1.17.2-solo
-        # values:
-        #   gateways:
-        #     istio-ingressgateway:
-        #       customService: true
+        values:
+          gateways:
+            istio-ingressgateway:
+              customService: true
         components:
           ingressGateways:
             - name: istio-eastwestgateway
               namespace: istio-gateways
               enabled: true
               label:
-                istio: eastwestgateway
-                topology.istio.io/network: cluster2
+                app: eastwestgateway
+                topology.istio.io/network: "cluster2"
               k8s:
                 env:
                   - name: ISTIO_META_ROUTER_MODE
                     value: "sni-dnat"
                   - name: ISTIO_META_REQUESTED_NETWORK_VIEW
                     value: cluster2
+                # serviceAnnotations:
+                #   service.beta.kubernetes.io/aws-load-balancer-type: external
+                #   service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: instance
+                # service:
+                #   type: LoadBalancer
+                #   selector: 
+                #     app: eastwestgateway
+                #     topology.istio.io/network: cluster2
+                #   #   app: eastwestgateway
+                #   ports:
+                #     - name: status-port
+                #       port: 15021
+                #       targetPort: 15021
+                #     - name: tls
+                #       port: 15443
+                #       targetPort: 15443
+                #     - name: https
+                #       port: 16443
+                #       protocol: TCP
+                #       targetPort: 16443
+                #     - name: tcp-istiod
+                #       port: 15012
+                #       protocol: TCP
+                #       targetPort: 15012
+                #     - name: tcp-webhook
+                #       port: 15017
+                #       protocol: TCP
+                #       targetPort: 15017

@@ -1,0 +1,10 @@
+name: "istio-eastwest"
+revision: 1-18
+service:
+  type: LoadBalancer 
+labels:
+  istio: eastwestgateway
+  istio.io/rev: 1-18
+  app: eastwestgateway
+annotations:
+  proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'

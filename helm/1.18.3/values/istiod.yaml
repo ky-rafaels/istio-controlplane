@@ -1,11 +1,11 @@
-revision: 1-17
+revision: 1-18
 global:
   meshID: mesh1
   multiCluster:
     clusterName: cluster1
   network: network1
   hub: us-docker.pkg.dev/gloo-mesh/istio-workshops # change this
-  tag: 1.17.2-solo
+  tag: 1.18.3-solo
   logAsJson: false
   logging:
     level: "default:info"
@@ -21,7 +21,7 @@ global:
     holdApplicationUntilProxyStarts: false
 meshConfig:
   rootNamespace: istio-config
-  trustDomain: cluster1
+  trustDomain: cluster.local
   accessLogFile: /dev/stdout
   accessLogEncoding: JSON
   enablePrometheusMerge: true
@@ -35,7 +35,6 @@ meshConfig:
     proxyMetadata:
       ISTIO_META_DNS_CAPTURE: "true"
       ISTIO_META_DNS_AUTO_ALLOCATE: "true"
-      GLOO_MESH_CLUSTER_NAME: cluster1
 pilot:
   autoscaleEnabled: true
   autoscaleMin: 1
@@ -50,7 +49,7 @@ pilot:
     PILOT_DEBOUNCE_AFTER: 300ms
     PILOT_DEBOUNCE_MAX: 10s
     PILOT_PUSH_THROTTLE: "1000"
-    PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "false"
+    PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "true"
   resources:
     requests:
       cpu: 500m

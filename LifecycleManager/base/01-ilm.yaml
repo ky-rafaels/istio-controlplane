@@ -98,8 +98,10 @@ spec:
               clusterName: cluster2
             network: cluster2
         meshConfig:
-          accessLogFile: /dev/stdout
+          # accessLogFile: /dev/stdout
           accessLogEncoding: JSON
+          # accessLogEnabled: 
+          # accessLogFormat: 
           enableTracing: true
           defaultConfig:        
             proxyMetadata:
