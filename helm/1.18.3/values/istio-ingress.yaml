@@ -4,7 +4,6 @@ service:
   type: LoadBalancer
 labels:
   istio: ingressgateway
-  gateway-type: private
   istio.io/rev: 1-18
 annotations:
   proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'

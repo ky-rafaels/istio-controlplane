@@ -100,8 +100,6 @@ spec:
         meshConfig:
           # accessLogFile: /dev/stdout
           accessLogEncoding: JSON
-          # accessLogEnabled: 
-          # accessLogFormat: 
           enableTracing: true
           defaultConfig:        
             proxyMetadata:

@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-ingress-private-1-18
+  name: istio-ingress-1-18
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -10,7 +10,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   destination:
-    namespace: istio-ingress-private
+    namespace: istio-ingress
     server: https://kubernetes.default.svc
   project: default
   sources:

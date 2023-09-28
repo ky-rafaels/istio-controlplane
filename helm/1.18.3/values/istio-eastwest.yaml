@@ -1,4 +1,4 @@
-name: "istio-eastwest"
+name: istio-eastwest
 revision: 1-18
 service:
   type: LoadBalancer 
