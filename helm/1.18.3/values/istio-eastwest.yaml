@@ -6,5 +6,5 @@ labels:
   istio: eastwestgateway
   istio.io/rev: 1-18
   app: eastwestgateway
-annotations:
-  proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+# annotations:
+#   proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
