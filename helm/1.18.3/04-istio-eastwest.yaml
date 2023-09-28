@@ -63,6 +63,6 @@ spec:
   selector:
     app: istio-ingressgateway
     istio: eastwestgateway
-    revision: 1-18
+    revision: canary
     topology.istio.io/network: "" 
   type: LoadBalancer

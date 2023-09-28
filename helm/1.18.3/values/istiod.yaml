@@ -1,4 +1,4 @@
-revision: 1-18
+revision: canary
 global:
   meshID: mesh1
   multiCluster:

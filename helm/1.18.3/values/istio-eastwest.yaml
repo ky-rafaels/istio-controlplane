@@ -1,5 +1,5 @@
 name: istio-eastwest
-revision: 1-18
+revision: canary
 service:
   type: LoadBalancer 
 labels:
