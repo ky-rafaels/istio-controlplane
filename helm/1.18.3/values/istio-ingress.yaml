@@ -1,4 +1,4 @@
-name: istio-ingress
+name: "" 
 revision: canary
 service:
   type: LoadBalancer

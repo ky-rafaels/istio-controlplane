@@ -1,4 +1,4 @@
-name: istio-eastwest
+name: "" 
 revision: canary
 service:
   type: LoadBalancer 
