@@ -1,9 +1,9 @@
 name: "" 
-revision: canary
+revision: 1-18-3
 service:
   type: LoadBalancer
 labels:
   istio: ingressgateway
-  istio.io/rev: canary
+  istio.io/rev: 1-18-3
 annotations:
   proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
