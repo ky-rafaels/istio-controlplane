@@ -50,7 +50,7 @@ pilot:
     PILOT_DEBOUNCE_AFTER: 300ms
     PILOT_DEBOUNCE_MAX: 10s
     PILOT_PUSH_THROTTLE: "1000"
-    PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "false"
+    PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "true"
   resources:
     requests:
       cpu: 500m
