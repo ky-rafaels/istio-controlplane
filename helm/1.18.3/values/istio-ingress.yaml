@@ -5,5 +5,5 @@ service:
 labels:
   istio: ingressgateway
   istio.io/rev: 1-18
-# annotations:
-#   proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+annotations:
+  proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
