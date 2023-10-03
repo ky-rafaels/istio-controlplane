@@ -2,14 +2,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: istiod
+  name: "istio-ingress-{{ name }}"
   namespace: argocd
 spec:
   generators:
     - clusters: {} 
   template:
     metadata:
-      name: 'istiod-{{ name }}'
+      name: "istio-ingress-{{ name }}"
     spec:
       project: default
       source: 
@@ -17,7 +17,7 @@ spec:
         targetRevision: main
         path: helm/1.18.3/istiod
         helm:
-          releaseName: istiod
+          releaseName: istio-ingress
           ignoreMissingValueFiles: true
           parameters:
             - name: cluster
@@ -27,7 +27,7 @@ spec:
             - values-{{ name }}.yaml
       destination:
         name: "{{ name }}"
-        namespace: 'istio-system'
+        namespace: 'istio-ingress'
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
