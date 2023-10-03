@@ -2,7 +2,7 @@ gateway:
   name: "" 
   revision: 1-18-3
   service:
-    enabled: False
+    customService: True
     # type: LoadBalancer 
   labels:
     istio.io/rev: 1-18-3 
