@@ -1,4 +1,4 @@
-istio-eastwest-gateway:
+gateway:
   name: "" 
   revision: 1-18-3
   service:
