@@ -2,22 +2,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: "istio-ingress"
+  name: "istio-eastwest"
   namespace: argocd
 spec:
   generators:
     - clusters: {} 
   template:
     metadata:
-      name: "istio-ingress-{{ name }}"
+      name: "istio-eastwest-{{ name }}"
     spec:
       project: default
       source: 
         repoURL: https://github.com/ky-rafaels/istio-controlplane.git
         targetRevision: main
-        path: helm/1.18.3/istio-ingress
+        path: helm/1.18.3/istio-eastwest
         helm:
-          releaseName: istio-ingress
+          releaseName: istio-eastwest
           ignoreMissingValueFiles: true
           parameters:
             - name: cluster
@@ -27,7 +27,7 @@ spec:
             - values-{{ name }}.yaml
       destination:
         name: "{{ name }}"
-        namespace: 'istio-ingress'
+        namespace: 'istio-eastwest'
       syncPolicy:
         syncOptions:
           - CreateNamespace=true
