@@ -1,9 +1,12 @@
+base:
+  defaultRevision: 1-18-3
 istiod:
   revision: 1-18-3
+  revisionTags: ["default"]
   global:
     meshID: mesh1
-    multiCluster:
-      clusterName: cluster1
+    # multiCluster:
+    #   clusterName: cluster1
     network: network1
     hub: us-docker.pkg.dev/gloo-mesh/istio-workshops # change this
     tag: 1.18.3-solo
