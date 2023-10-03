@@ -1,0 +1,33 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: istiod
+spec:
+  generators:
+    - clusters: {} 
+  template:
+    metadata:
+      name: 'istiod-{{ name }}'
+    spec:
+      project: default
+      source: 
+        repoURL: https://github.com/ky-rafaels/istio-controlplane.git
+        targetRevision: HEAD
+        path: helm/1.18.3/istiod
+        helm:
+          releaseName: istiod
+          ignoreMissingValueFiles: true
+          parameters:
+            - name: cluster
+              value: "{{ name }}"
+          valueFiles:
+            - values.yaml
+            - values-{{ name }}.yaml
+      destination:
+        name: "{{ name }}"
+        namespace: 'istio-system'
+      syncPolicy:
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
