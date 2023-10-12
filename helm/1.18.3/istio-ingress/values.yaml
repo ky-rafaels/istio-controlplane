@@ -2,7 +2,7 @@ gateway:
   name: "" 
   revision: 1-18-3
   service:
-    type: LoadBalancer
+    type: None 
   labels:
     istio: ingressgateway
     istio.io/rev: 1-18-3

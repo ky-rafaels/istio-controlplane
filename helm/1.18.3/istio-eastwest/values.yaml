@@ -3,7 +3,6 @@ gateway:
   revision: 1-18-3
   service:
     type: None
-    # type: LoadBalancer 
   labels:
     istio.io/rev: 1-18-3 
     app: eastwestgateway
