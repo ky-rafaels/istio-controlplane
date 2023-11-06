@@ -1,8 +1,8 @@
 base:
-  defaultRevision: 1-18-3
+  defaultRevision: 1-18
 istiod:
-  revision: 1-18-3
-  revisionTags: ["default"]
+  revision: 1-18
+  revisionTags: ["prod-canary"]
   global:
     meshID: mesh1
     network: network1
@@ -37,6 +37,13 @@ istiod:
       proxyMetadata:
         ISTIO_META_DNS_CAPTURE: "true"
         ISTIO_META_DNS_AUTO_ALLOCATE: "true"
+      proxyStatsMatcher:
+        inclusionRegexps:
+          - ".*outlier_detection.*"
+          - ".*upstream_rq_retry.*"
+          - ".*upstream_cx_.*"
+        inclusionSuffixes:
+          - "upstream_rq_timeout"
   pilot:
     autoscaleEnabled: true
     autoscaleMin: 1

@@ -24,7 +24,7 @@ spec:
               value: "cluster1"
           valueFiles:
             - values.yaml
-            - values-{{ name }}.yaml
+            - values-{{ env }}.yaml
       destination:
         name: "{{ name }}"
         namespace: 'istio-system'
