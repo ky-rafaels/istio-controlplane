@@ -19,6 +19,8 @@ global:
         cpu: 2000m
         memory: 1024Mi
     holdApplicationUntilProxyStarts: false
+telemetry:
+  enabled: false
 meshConfig:
   rootNamespace: istio-config
   trustDomain: cluster1
