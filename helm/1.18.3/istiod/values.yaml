@@ -21,12 +21,14 @@ istiod:
           cpu: 2000m
           memory: 1024Mi
       holdApplicationUntilProxyStarts: false
+  telemetry:
+    enabled: false
   meshConfig:
     rootNamespace: istio-config
     trustDomain: cluster.local
     accessLogFile: /dev/stdout
     accessLogEncoding: JSON
-    enablePrometheusMerge: true
+    enablePrometheusMerge: false
     defaultConfig:
       holdApplicationUntilProxyStarts: true
       envoyMetricsService:
@@ -37,13 +39,6 @@ istiod:
       proxyMetadata:
         ISTIO_META_DNS_CAPTURE: "true"
         ISTIO_META_DNS_AUTO_ALLOCATE: "true"
-      proxyStatsMatcher:
-        inclusionRegexps:
-          - ".*outlier_detection.*"
-          - ".*upstream_rq_retry.*"
-          # - ".*upstream_cx_.*"
-        inclusionSuffixes:
-          - "upstream_rq_timeout"
   pilot:
     autoscaleEnabled: true
     autoscaleMin: 1
@@ -58,7 +53,7 @@ istiod:
       PILOT_DEBOUNCE_AFTER: 300ms
       PILOT_DEBOUNCE_MAX: 10s
       PILOT_PUSH_THROTTLE: "1000"
-      PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "true"
+      PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "false"
     resources:
       requests:
         cpu: 500m
