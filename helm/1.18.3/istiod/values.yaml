@@ -20,7 +20,7 @@ istiod:
         limits:
           cpu: 2000m
           memory: 1024Mi
-      holdApplicationUntilProxyStarts: false
+      holdApplicationUntilProxyStarts: true
   telemetry:
     enabled: false
   meshConfig:
