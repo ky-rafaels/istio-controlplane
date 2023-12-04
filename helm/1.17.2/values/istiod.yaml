@@ -37,7 +37,7 @@ meshConfig:
     proxyMetadata:
       ISTIO_META_DNS_CAPTURE: "true"
       ISTIO_META_DNS_AUTO_ALLOCATE: "true"
-      GLOO_MESH_CLUSTER_NAME: cluster1
+      BOOSTRAP_XDS_AGENT: "true"
     proxyStatsMatcher:
       inclusionRegexps:
         - ".*outlier_detection.*"
@@ -59,7 +59,7 @@ pilot:
     PILOT_DEBOUNCE_AFTER: 300ms
     PILOT_DEBOUNCE_MAX: 10s
     PILOT_PUSH_THROTTLE: "1000"
-    PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "true"
+    PILOT_FILTER_GATEWAY_CLUSTER_CONFIG: "false"
   resources:
     requests:
       cpu: 500m
