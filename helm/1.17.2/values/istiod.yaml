@@ -27,6 +27,7 @@ meshConfig:
   accessLogFile: /dev/stdout
   accessLogEncoding: JSON
   enablePrometheusMerge: true
+  outboundClusterStatName: "%SERVICE_FQDN%"
   defaultConfig:
     holdApplicationUntilProxyStarts: true
     envoyMetricsService:
