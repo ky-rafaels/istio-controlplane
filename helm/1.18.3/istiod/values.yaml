@@ -2,12 +2,12 @@ base:
   defaultRevision: 1-18
 istiod:
   revision: 1-18
-  revisionTags: ["prod-canary"]
+  # revisionTags: ["prod-canary"]
   global:
     meshID: mesh1
     network: network1
-    hub: us-docker.pkg.dev/gloo-mesh/istio-workshops # change this
-    tag: 1.18.3-solo
+    hub: "" 
+    tag: 1.18.3
     logAsJson: false
     logging:
       level: "default:info"
@@ -24,17 +24,17 @@ istiod:
   telemetry:
     enabled: false
   meshConfig:
-    rootNamespace: istio-config
+    rootNamespace: istio-system
     trustDomain: cluster.local
     accessLogFile: /dev/stdout
     accessLogEncoding: JSON
-    enablePrometheusMerge: false
+    enablePrometheusMerge: true
     defaultConfig:
       holdApplicationUntilProxyStarts: true
-      envoyMetricsService:
-        address: gloo-mesh-agent.gloo-mesh:9977
-      envoyAccessLogService:
-        address: gloo-mesh-agent.gloo-mesh:9977
+      # envoyMetricsService:
+      #   address: gloo-mesh-agent.gloo-mesh:9977
+      # envoyAccessLogService:
+      #   address: gloo-mesh-agent.gloo-mesh:9977
       terminationDrainDuration: 10s
       proxyMetadata:
         ISTIO_META_DNS_CAPTURE: "true"
