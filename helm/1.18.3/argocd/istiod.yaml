@@ -9,12 +9,12 @@ spec:
     - clusters: {} 
   template:
     metadata:
-      name: 'istiod-{{ name }}'
+      name: 'istiod-dev'
     spec:
       project: default
       source: 
         repoURL: https://github.com/ky-rafaels/istio-controlplane.git
-        targetRevision: main
+        targetRevision: feature/istio-basic
         path: helm/1.18.3/istiod
         helm:
           releaseName: istiod
